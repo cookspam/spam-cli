@@ -10,17 +10,17 @@ impl Miner {
         {
             let treasury = get_treasury(&self.rpc_client).await;
             let balance = treasury_tokens.token_amount.ui_amount_string;
-            println!("{:} ORE", balance);
+            println!("{:} SPAM", balance);
             println!("Admin: {}", treasury.admin);
             println!("Difficulty: {}", treasury.difficulty.to_string());
             println!("Last reset at: {}", treasury.last_reset_at);
             println!(
-                "Reward rate: {} ORE",
-                (treasury.reward_rate as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
+                "Reward rate: {} SPAM",
+                (treasury.reward_rate as f64) / 10f64.powf(spam::TOKEN_DECIMALS as f64)
             );
             println!(
-                "Total claimed rewards: {} ORE",
-                (treasury.total_claimed_rewards as f64) / 10f64.powf(ore::TOKEN_DECIMALS as f64)
+                "Total claimed rewards: {} SPAM",
+                (treasury.total_claimed_rewards as f64) / 10f64.powf(spam::TOKEN_DECIMALS as f64)
             );
         }
     }

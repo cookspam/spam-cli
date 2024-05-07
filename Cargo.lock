@@ -2183,19 +2183,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "mpl-token-metadata"
-version = "4.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "caf0f61b553e424a6234af1268456972ee66c2222e1da89079242251fa7479e5"
-dependencies = [
- "borsh 0.10.3",
- "num-derive 0.3.3",
- "num-traits",
- "solana-program",
- "thiserror",
-]
-
-[[package]]
 name = "nix"
 version = "0.26.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2421,47 +2408,6 @@ name = "openssl-probe"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ff011a302c396a5197692431fc1948019154afc178baf7d8e37367442a4601cf"
-
-[[package]]
-name = "ore-cli"
-version = "0.4.11"
-dependencies = [
- "bincode",
- "bs58 0.5.1",
- "cached",
- "chrono",
- "clap 4.4.12",
- "futures",
- "log",
- "ore-program",
- "rand 0.8.5",
- "solana-cli-config",
- "solana-client",
- "solana-program",
- "solana-sdk",
- "solana-transaction-status",
- "spl-associated-token-account",
- "spl-token",
- "tokio",
-]
-
-[[package]]
-name = "ore-program"
-version = "1.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fcf2aafa6b257df0f423042e69eb7dd5dbc90a03f2469b986b14401dc6570246"
-dependencies = [
- "bs58 0.5.1",
- "bytemuck",
- "mpl-token-metadata",
- "num_enum 0.7.2",
- "shank",
- "solana-program",
- "spl-associated-token-account",
- "spl-token",
- "static_assertions",
- "thiserror",
-]
 
 [[package]]
 name = "os_str_bytes"
@@ -4164,6 +4110,46 @@ dependencies = [
  "scroll",
  "thiserror",
  "winapi",
+]
+
+[[package]]
+name = "spam-cli"
+version = "0.4.11"
+dependencies = [
+ "bincode",
+ "bs58 0.5.1",
+ "cached",
+ "chrono",
+ "clap 4.4.12",
+ "futures",
+ "log",
+ "rand 0.8.5",
+ "solana-cli-config",
+ "solana-client",
+ "solana-program",
+ "solana-sdk",
+ "solana-transaction-status",
+ "spam-program",
+ "spl-associated-token-account",
+ "spl-token",
+ "tokio",
+]
+
+[[package]]
+name = "spam-program"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f015959c8cc242fde4564ee209da2a8e54b0dfb4adeb5eed99c9c7c8c01f8589"
+dependencies = [
+ "bs58 0.5.1",
+ "bytemuck",
+ "num_enum 0.7.2",
+ "shank",
+ "solana-program",
+ "spl-associated-token-account",
+ "spl-token",
+ "static_assertions",
+ "thiserror",
 ]
 
 [[package]]

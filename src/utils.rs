@@ -1,5 +1,5 @@
 use cached::proc_macro::cached;
-use ore::{
+use spam::{
     self,
     state::{Proof, Treasury},
     utils::AccountDeserialize,
@@ -37,7 +37,7 @@ pub async fn get_clock_account(client: &RpcClient) -> Clock {
 
 #[cached]
 pub fn proof_pubkey(authority: Pubkey) -> Pubkey {
-    Pubkey::find_program_address(&[PROOF, authority.as_ref()], &ore::ID).0
+    Pubkey::find_program_address(&[PROOF, authority.as_ref()], &spam::ID).0
 }
 
 #[cached]

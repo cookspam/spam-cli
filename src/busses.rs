@@ -1,4 +1,4 @@
-use ore::{state::Bus, utils::AccountDeserialize, BUS_ADDRESSES, TOKEN_DECIMALS};
+use spam::{state::Bus, utils::AccountDeserialize, BUS_ADDRESSES, TOKEN_DECIMALS};
 use solana_client::client_error::Result;
 
 use crate::Miner;
@@ -11,7 +11,7 @@ impl Miner {
             match Bus::try_from_bytes(&data) {
                 Ok(bus) => {
                     let rewards = (bus.rewards as f64) / 10f64.powf(TOKEN_DECIMALS as f64);
-                    println!("Bus {}: {:} ORE", bus.id, rewards);
+                    println!("Bus {}: {:} SPAM", bus.id, rewards);
                 }
                 Err(_) => {}
             }

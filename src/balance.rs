@@ -21,12 +21,12 @@ impl Miner {
         let client = self.rpc_client.clone();
         let token_account_address = spl_associated_token_account::get_associated_token_address(
             &address,
-            &ore::MINT_ADDRESS,
+            &spam::MINT_ADDRESS,
         );
         match client.get_token_account(&token_account_address).await {
             Ok(token_account) => {
                 if let Some(token_account) = token_account {
-                    println!("{:} ORE", token_account.token_amount.ui_amount_string);
+                    println!("{:} SPAM", token_account.token_amount.ui_amount_string);
                 } else {
                     println!("Account not found");
                 }

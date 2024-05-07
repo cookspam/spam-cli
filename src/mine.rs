@@ -3,7 +3,7 @@ use std::{
     sync::{atomic::AtomicBool, Arc, Mutex},
 };
 
-use ore::{self, state::Bus, BUS_ADDRESSES, BUS_COUNT, EPOCH_DURATION};
+use spam::{self, state::Bus, BUS_ADDRESSES, BUS_COUNT, EPOCH_DURATION};
 use rand::Rng;
 use solana_program::{keccak::HASH_BYTES, program_memory::sol_memcmp, pubkey::Pubkey};
 use solana_sdk::{
@@ -32,17 +32,17 @@ impl Miner {
         // Start mining loop
         loop {
             // Fetch account state
-            let balance = self.get_ore_display_balance().await;
+            let balance = self.get_spam_display_balance().await;
             let treasury = get_treasury(&self.rpc_client).await;
             let proof = get_proof(&self.rpc_client, signer.pubkey()).await;
             let rewards =
-                (proof.claimable_rewards as f64) / (10f64.powf(ore::TOKEN_DECIMALS as f64));
+                (proof.claimable_rewards as f64) / (10f64.powf(spam::TOKEN_DECIMALS as f64));
             let reward_rate =
-                (treasury.reward_rate as f64) / (10f64.powf(ore::TOKEN_DECIMALS as f64));
+                (treasury.reward_rate as f64) / (10f64.powf(spam::TOKEN_DECIMALS as f64));
             stdout.write_all(b"\x1b[2J\x1b[3J\x1b[H").ok();
-            println!("Balance: {} ORE", balance);
-            println!("Claimable: {} ORE", rewards);
-            println!("Reward rate: {} ORE", reward_rate);
+            println!("Balance: {} SPAM", balance);
+            println!("Claimable: {} SPAM", rewards);
+            println!("Reward rate: {} SPAM", reward_rate);
 
             // Escape sequence that clears the screen and the scrollback buffer
             println!("\nMining for a valid hash...");
@@ -78,7 +78,7 @@ impl Miner {
                             ComputeBudgetInstruction::set_compute_unit_limit(CU_LIMIT_RESET);
                         let cu_price_ix =
                             ComputeBudgetInstruction::set_compute_unit_price(self.priority_fee);
-                        let reset_ix = ore::instruction::reset(signer.pubkey());
+                        let reset_ix = spam::instruction::reset(signer.pubkey());
                         self.send_and_confirm(&[cu_limit_ix, cu_price_ix, reset_ix], false, true)
                             .await
                             .ok();
@@ -87,12 +87,12 @@ impl Miner {
 
                 // Submit request.
                 let bus = self.find_bus_id(treasury.reward_rate).await;
-                let bus_rewards = (bus.rewards as f64) / (10f64.powf(ore::TOKEN_DECIMALS as f64));
-                println!("Sending on bus {} ({} ORE)", bus.id, bus_rewards);
+                let bus_rewards = (bus.rewards as f64) / (10f64.powf(spam::TOKEN_DECIMALS as f64));
+                println!("Sending on bus {} ({} SPAM)", bus.id, bus_rewards);
                 let cu_limit_ix = ComputeBudgetInstruction::set_compute_unit_limit(CU_LIMIT_MINE);
                 let cu_price_ix =
                     ComputeBudgetInstruction::set_compute_unit_price(self.priority_fee);
-                let ix_mine = ore::instruction::mine(
+                let ix_mine = spam::instruction::mine(
                     signer.pubkey(),
                     BUS_ADDRESSES[bus.id as usize],
                     next_hash.into(),
@@ -237,12 +237,12 @@ impl Miner {
         true
     }
 
-    pub async fn get_ore_display_balance(&self) -> String {
+    pub async fn get_spam_display_balance(&self) -> String {
         let client = self.rpc_client.clone();
         let signer = self.signer();
         let token_account_address = spl_associated_token_account::get_associated_token_address(
             &signer.pubkey(),
-            &ore::MINT_ADDRESS,
+            &spam::MINT_ADDRESS,
         );
         match client.get_token_account(&token_account_address).await {
             Ok(token_account) => {

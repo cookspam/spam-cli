@@ -73,13 +73,13 @@ struct Args {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
-    #[command(about = "Fetch the Ore balance of an account")]
+    #[command(about = "Fetch the Spam balance of an account")]
     Balance(BalanceArgs),
 
     #[command(about = "Fetch the distributable rewards of the busses")]
     Busses(BussesArgs),
 
-    #[command(about = "Mine Ore using local compute")]
+    #[command(about = "Mine Spam using local compute")]
     Mine(MineArgs),
 
     #[command(about = "Claim available mining rewards")]
